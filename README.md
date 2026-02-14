@@ -1,5 +1,7 @@
 # Snowball Visualizer
 
+![screenshot](./public/screenshot.png)
+
 복리 투자 시뮬레이터. 월 적립금과 예상 수익률을 입력하면 장기 투자 시 자산이 어떻게 증가하는지 시각화합니다.
 
 ## 기능
