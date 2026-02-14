@@ -1,6 +1,7 @@
 "use client";
 
 import InputForm from "@/components/InputForm";
+import FinancialChart from "@/components/FinancialChart";
 import { useFinancialStore } from "@/store/useFinancialStore";
 
 export default function Home() {
@@ -61,14 +62,12 @@ export default function Home() {
               <InputForm onSubmit={handleFormSubmit} />
             </div>
 
-            {/* 차트 자리 - Recharts로 시각화 예정 */}
+            {/* 차트 */}
             <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4 sm:p-6">
-              <h2 className="text-sm font-medium text-slate-200 sm:text-base">
-                자산 시각화 (Chart Placeholder)
+              <h2 className="mb-4 text-sm font-medium text-slate-200 sm:text-base">
+                자산 시각화
               </h2>
-              <p className="mt-2 text-xs text-slate-400 sm:text-sm">
-                복리로 불어나는 자산 곡선과 연도별 스냅샷 차트가 이 영역에 들어갈 예정이다.
-              </p>
+              <FinancialChart />
             </div>
           </section>
         </div>
