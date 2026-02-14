@@ -1,13 +1,18 @@
+"use client";
+
 import InputForm from "@/components/InputForm";
+import { useFinancialStore } from "@/store/useFinancialStore";
 
 export default function Home() {
+  const { setData, calculate } = useFinancialStore();
+
   const handleFormSubmit = (data: {
     monthlyDeposit: number;
     annualRate: number;
     years: number;
   }) => {
-    // TODO: 상태 관리 스토어에 데이터 저장 및 계산 로직 실행
-    console.log("Form submitted:", data);
+    setData(data);
+    calculate();
   };
 
   return (
