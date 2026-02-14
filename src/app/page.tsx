@@ -1,4 +1,21 @@
+"use client";
+
+import InputForm from "@/components/InputForm";
+import FinancialChart from "@/components/FinancialChart";
+import { useFinancialStore } from "@/store/useFinancialStore";
+
 export default function Home() {
+  const { setData, calculate } = useFinancialStore();
+
+  const handleFormSubmit = (data: {
+    monthlyDeposit: number;
+    annualRate: number;
+    years: number;
+  }) => {
+    setData(data);
+    calculate();
+  };
+
   return (
     // 이 컴포넌트는 페이지 단위 레이아웃을 담당한다.
     // 헤더 - 메인 콘텐츠 - 푸터 구조를 만들고,
@@ -37,24 +54,20 @@ export default function Home() {
           </section>
 
           <section className="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1.2fr)]">
-            {/* 입력 폼 자리 - 추후 client component로 분리 예정 */}
+            {/* 입력 폼 */}
             <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4 sm:p-6">
-              <h2 className="text-sm font-medium text-slate-200 sm:text-base">
-                입력 영역 (Form Placeholder)
+              <h2 className="mb-4 text-sm font-medium text-slate-200 sm:text-base">
+                투자 정보 입력
               </h2>
-              <p className="mt-2 text-xs text-slate-400 sm:text-sm">
-                월 적립금, 예상 연 수익률, 투자 기간 등의 입력 폼이 이 영역에 들어갈 예정이다.
-              </p>
+              <InputForm onSubmit={handleFormSubmit} />
             </div>
 
-            {/* 차트 자리 - Recharts로 시각화 예정 */}
+            {/* 차트 */}
             <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4 sm:p-6">
-              <h2 className="text-sm font-medium text-slate-200 sm:text-base">
-                자산 시각화 (Chart Placeholder)
+              <h2 className="mb-4 text-sm font-medium text-slate-200 sm:text-base">
+                자산 시각화
               </h2>
-              <p className="mt-2 text-xs text-slate-400 sm:text-sm">
-                복리로 불어나는 자산 곡선과 연도별 스냅샷 차트가 이 영역에 들어갈 예정이다.
-              </p>
+              <FinancialChart />
             </div>
           </section>
         </div>
