@@ -14,25 +14,46 @@ export default function InputForm({ onSubmit }: InputFormProps) {
   const [monthlyDeposit, setMonthlyDeposit] = useState<string>("");
   const [annualRate, setAnnualRate] = useState<string>("");
   const [years, setYears] = useState<string>("");
+  const [errors, setErrors] = useState<{
+    monthlyDeposit?: string;
+    annualRate?: string;
+    years?: string;
+  }>({});
+
+  const validate = () => {
+    const newErrors: typeof errors = {};
+
+    const deposit = parseFloat(monthlyDeposit);
+    if (!monthlyDeposit || isNaN(deposit) || deposit <= 0) {
+      newErrors.monthlyDeposit = "월 적립금을 올바르게 입력해주세요.";
+    }
+
+    const rate = parseFloat(annualRate);
+    if (!annualRate || isNaN(rate) || rate < 0) {
+      newErrors.annualRate = "예상 연 수익률을 올바르게 입력해주세요.";
+    }
+
+    const investmentYears = parseFloat(years);
+    if (!years || isNaN(investmentYears) || investmentYears <= 0) {
+      newErrors.years = "투자 기간을 올바르게 입력해주세요.";
+    } else if (investmentYears > 50) {
+      newErrors.years = "투자 기간은 최대 50년까지 입력 가능합니다.";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!validate()) {
+      return;
+    }
+
     const deposit = parseFloat(monthlyDeposit);
     const rate = parseFloat(annualRate);
     const investmentYears = parseFloat(years);
-
-    if (
-      isNaN(deposit) ||
-      isNaN(rate) ||
-      isNaN(investmentYears) ||
-      deposit <= 0 ||
-      rate < 0 ||
-      investmentYears <= 0 ||
-      investmentYears > 50
-    ) {
-      return;
-    }
 
     onSubmit({
       monthlyDeposit: deposit,
@@ -60,10 +81,22 @@ export default function InputForm({ onSubmit }: InputFormProps) {
           type="text"
           inputMode="numeric"
           value={monthlyDeposit}
-          onChange={(e) => setMonthlyDeposit(formatNumber(e.target.value))}
+          onChange={(e) => {
+            setMonthlyDeposit(formatNumber(e.target.value));
+            if (errors.monthlyDeposit) {
+              setErrors((prev) => ({ ...prev, monthlyDeposit: undefined }));
+            }
+          }}
           placeholder="예: 100000"
-          className="w-full rounded-lg border border-slate-700 bg-slate-800/50 px-4 py-2.5 text-slate-50 placeholder:text-slate-500 focus:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-600/50 transition-colors"
+          className={`w-full rounded-lg border bg-slate-800/50 px-4 py-2.5 text-slate-50 placeholder:text-slate-500 focus:outline-none focus:ring-2 transition-colors ${
+            errors.monthlyDeposit
+              ? "border-red-500 focus:border-red-500 focus:ring-red-500/50"
+              : "border-slate-700 focus:border-slate-600 focus:ring-slate-600/50"
+          }`}
         />
+        {errors.monthlyDeposit && (
+          <p className="mt-1.5 text-xs text-red-400">{errors.monthlyDeposit}</p>
+        )}
       </div>
 
       <div>
@@ -78,10 +111,22 @@ export default function InputForm({ onSubmit }: InputFormProps) {
           type="text"
           inputMode="decimal"
           value={annualRate}
-          onChange={(e) => setAnnualRate(formatNumber(e.target.value))}
+          onChange={(e) => {
+            setAnnualRate(formatNumber(e.target.value));
+            if (errors.annualRate) {
+              setErrors((prev) => ({ ...prev, annualRate: undefined }));
+            }
+          }}
           placeholder="예: 7.5"
-          className="w-full rounded-lg border border-slate-700 bg-slate-800/50 px-4 py-2.5 text-slate-50 placeholder:text-slate-500 focus:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-600/50 transition-colors"
+          className={`w-full rounded-lg border bg-slate-800/50 px-4 py-2.5 text-slate-50 placeholder:text-slate-500 focus:outline-none focus:ring-2 transition-colors ${
+            errors.annualRate
+              ? "border-red-500 focus:border-red-500 focus:ring-red-500/50"
+              : "border-slate-700 focus:border-slate-600 focus:ring-slate-600/50"
+          }`}
         />
+        {errors.annualRate && (
+          <p className="mt-1.5 text-xs text-red-400">{errors.annualRate}</p>
+        )}
       </div>
 
       <div>
@@ -96,13 +141,26 @@ export default function InputForm({ onSubmit }: InputFormProps) {
           type="text"
           inputMode="numeric"
           value={years}
-          onChange={(e) => setYears(formatNumber(e.target.value))}
+          onChange={(e) => {
+            setYears(formatNumber(e.target.value));
+            if (errors.years) {
+              setErrors((prev) => ({ ...prev, years: undefined }));
+            }
+          }}
           placeholder="예: 10"
-          className="w-full rounded-lg border border-slate-700 bg-slate-800/50 px-4 py-2.5 text-slate-50 placeholder:text-slate-500 focus:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-600/50 transition-colors"
+          className={`w-full rounded-lg border bg-slate-800/50 px-4 py-2.5 text-slate-50 placeholder:text-slate-500 focus:outline-none focus:ring-2 transition-colors ${
+            errors.years
+              ? "border-red-500 focus:border-red-500 focus:ring-red-500/50"
+              : "border-slate-700 focus:border-slate-600 focus:ring-slate-600/50"
+          }`}
         />
-        <p className="mt-1.5 text-xs text-slate-500">
-          최대 50년까지 입력 가능합니다.
-        </p>
+        {errors.years ? (
+          <p className="mt-1.5 text-xs text-red-400">{errors.years}</p>
+        ) : (
+          <p className="mt-1.5 text-xs text-slate-500">
+            최대 50년까지 입력 가능합니다.
+          </p>
+        )}
       </div>
 
       <button
