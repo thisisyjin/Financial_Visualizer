@@ -3,6 +3,7 @@
 import InputForm from "@/components/InputForm";
 import FinancialChart from "@/components/FinancialChart";
 import { useFinancialStore } from "@/store/useFinancialStore";
+import { Github } from "lucide-react";
 
 export default function Home() {
   const { setData, calculate } = useFinancialStore();
@@ -29,13 +30,12 @@ export default function Home() {
             <span className="text-slate-400"> Effect</span>
           </div>
           <a
-            href="https://github.com/"
+            href="https://github.com/thisisyjin/Financial_Visualizer"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-md border border-slate-700 px-3 py-1.5 text-sm text-slate-200 hover:border-slate-500 hover:bg-slate-900"
+            className="inline-flex items-center gap-2 rounded-md border border-slate-700 px-3 py-1.5 text-sm text-slate-200 hover:border-slate-500 hover:bg-slate-900 transition-colors"
           >
-            {/* 앞으로 lucide-react의 아이콘 컴포넌트를 교체해서 사용할 예정이다. */}
-            <span className="h-4 w-4 rounded-sm bg-slate-200" aria-hidden />
+            <Github className="h-4 w-4" />
             <span className="hidden sm:inline">GitHub</span>
           </a>
         </div>
@@ -49,7 +49,7 @@ export default function Home() {
               Snowball Visualizer
             </h1>
             <p className="mt-2 max-w-2xl text-sm text-slate-400 sm:text-base">
-              매월 적립금과 예상 수익률을 입력하면, 10년 동안 복리로 자산이 어떻게 쌓이는지 시각적으로 확인할 수 있는 대시보드입니다.
+              매월 적립금과 예상 수익률을 입력하면, 복리로 자산이 어떻게 증가하는지 시각적으로 확인할 수 있는 대시보드입니다.
             </p>
           </section>
 
