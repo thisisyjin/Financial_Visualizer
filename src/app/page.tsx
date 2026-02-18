@@ -49,7 +49,7 @@ export default function Home() {
               Snowball Visualizer
             </h1>
             <p className="mt-2 max-w-2xl text-sm text-slate-400 sm:text-base">
-              매월 적립금과 예상 수익률을 입력하면, 10년 동안 복리로 자산이 어떻게 쌓이는지 시각적으로 확인할 수 있는 대시보드입니다.
+              매월 적립금과 예상 수익률을 입력하면, 복리로 자산이 어떻게 증가하는지 시각적으로 확인할 수 있는 대시보드입니다.
             </p>
           </section>
 
