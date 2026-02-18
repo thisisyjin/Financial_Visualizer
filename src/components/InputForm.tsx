@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface InputFormProps {
   onSubmit: (data: {
@@ -10,10 +10,18 @@ interface InputFormProps {
   }) => void;
 }
 
+const DEFAULT_MONTHLY_DEPOSIT = 100000;
+const DEFAULT_ANNUAL_RATE = 7.5;
+const DEFAULT_YEARS = 10;
+
 export default function InputForm({ onSubmit }: InputFormProps) {
-  const [monthlyDeposit, setMonthlyDeposit] = useState<string>("");
-  const [annualRate, setAnnualRate] = useState<string>("");
-  const [years, setYears] = useState<string>("");
+  const [monthlyDeposit, setMonthlyDeposit] = useState<string>(
+    DEFAULT_MONTHLY_DEPOSIT.toString()
+  );
+  const [annualRate, setAnnualRate] = useState<string>(
+    DEFAULT_ANNUAL_RATE.toString()
+  );
+  const [years, setYears] = useState<string>(DEFAULT_YEARS.toString());
   const [errors, setErrors] = useState<{
     monthlyDeposit?: string;
     annualRate?: string;
@@ -61,6 +69,16 @@ export default function InputForm({ onSubmit }: InputFormProps) {
       years: investmentYears,
     });
   };
+
+  useEffect(() => {
+    // 컴포넌트 마운트 시 기본값으로 계산 실행
+    onSubmit({
+      monthlyDeposit: DEFAULT_MONTHLY_DEPOSIT,
+      annualRate: DEFAULT_ANNUAL_RATE,
+      years: DEFAULT_YEARS,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const formatNumber = (value: string): string => {
     const num = value.replace(/[^0-9.]/g, "");
