@@ -183,7 +183,7 @@ export default function InputForm({ onSubmit }: InputFormProps) {
 
       <button
         type="submit"
-        className="w-full rounded-lg bg-slate-700 px-4 py-2.5 text-sm font-medium text-slate-50 hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-600/50 focus:ring-offset-2 focus:ring-offset-slate-950 transition-colors"
+        className="w-full rounded-lg bg-slate-700 px-4 py-2.5 text-sm font-medium text-slate-50 hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-600/50 focus:ring-offset-2 focus:ring-offset-slate-950 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         계산하기
       </button>
