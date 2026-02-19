@@ -63,11 +63,11 @@ export default function FinancialChart() {
         </div>
       )}
 
-      <div className="h-[400px] w-full">
+      <div className="h-[450px] w-full">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={chartData}
-            margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
+            margin={{ top: 10, right: 20, left: 10, bottom: 10 }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
             <XAxis
@@ -93,8 +93,11 @@ export default function FinancialChart() {
                 border: "1px solid #475569",
                 borderRadius: "8px",
                 color: "#f1f5f9",
+                boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.3)",
               }}
               formatter={(value: number) => formatCurrency(value) + "원"}
+              labelStyle={{ color: "#cbd5e1", fontWeight: 500 }}
+              cursor={{ stroke: "#64748b", strokeWidth: 1, strokeDasharray: "3 3" }}
             />
             <Legend
               wrapperStyle={{ color: "#cbd5e1", fontSize: "12px" }}
