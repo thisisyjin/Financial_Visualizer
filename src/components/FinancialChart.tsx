@@ -107,6 +107,9 @@ export default function FinancialChart() {
               strokeWidth={2}
               dot={{ r: 3, fill: "#60a5fa" }}
               activeDot={{ r: 5 }}
+              isAnimationActive={true}
+              animationDuration={800}
+              animationEasing="ease-out"
             />
             <Line
               type="monotone"
@@ -115,6 +118,9 @@ export default function FinancialChart() {
               strokeWidth={2}
               dot={{ r: 3, fill: "#34d399" }}
               activeDot={{ r: 5 }}
+              isAnimationActive={true}
+              animationDuration={1000}
+              animationEasing="ease-out"
             />
             <Line
               type="monotone"
@@ -123,6 +129,9 @@ export default function FinancialChart() {
               strokeWidth={3}
               dot={{ r: 4, fill: "#fbbf24" }}
               activeDot={{ r: 6 }}
+              isAnimationActive={true}
+              animationDuration={1200}
+              animationEasing="ease-out"
             />
           </LineChart>
         </ResponsiveContainer>
