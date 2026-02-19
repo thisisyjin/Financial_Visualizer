@@ -41,29 +41,29 @@ export default function FinancialChart() {
   return (
     <div className="space-y-4">
       {data && (
-        <div className="grid grid-cols-3 gap-4 rounded-lg bg-slate-800/50 p-4">
+        <div className="grid grid-cols-3 gap-2 rounded-lg bg-slate-800/50 p-3 sm:gap-4 sm:p-4">
           <div>
             <p className="text-xs text-slate-400">월 적립금</p>
-            <p className="mt-1 text-sm font-semibold text-slate-50">
+            <p className="mt-1 text-xs font-semibold text-slate-50 sm:text-sm">
               {formatCurrency(data.monthlyDeposit)}원
             </p>
           </div>
           <div>
             <p className="text-xs text-slate-400">연 수익률</p>
-            <p className="mt-1 text-sm font-semibold text-slate-50">
+            <p className="mt-1 text-xs font-semibold text-slate-50 sm:text-sm">
               {data.annualRate}%
             </p>
           </div>
           <div>
             <p className="text-xs text-slate-400">투자 기간</p>
-            <p className="mt-1 text-sm font-semibold text-slate-50">
+            <p className="mt-1 text-xs font-semibold text-slate-50 sm:text-sm">
               {data.years}년
             </p>
           </div>
         </div>
       )}
 
-      <div className="h-[450px] w-full">
+      <div className="h-[350px] w-full sm:h-[450px]">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={chartData}
@@ -141,11 +141,11 @@ export default function FinancialChart() {
       </div>
 
       {snapshots.length > 0 && (
-        <div className="rounded-lg bg-slate-800/30 p-4">
+        <div className="rounded-lg bg-slate-800/30 p-3 sm:p-4">
           <p className="mb-2 text-xs font-medium text-slate-300">
             최종 결과 ({snapshots[snapshots.length - 1].year})
           </p>
-          <div className="grid grid-cols-3 gap-4 text-sm">
+          <div className="grid grid-cols-3 gap-2 text-xs sm:gap-4 sm:text-sm">
             <div>
               <p className="text-slate-400">총 적립금</p>
               <p className="mt-1 font-semibold text-slate-50">
