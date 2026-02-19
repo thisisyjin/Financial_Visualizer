@@ -6,7 +6,7 @@ import { useFinancialStore } from "@/store/useFinancialStore";
 import { Github } from "lucide-react";
 
 export default function Home() {
-  const { setData, calculate } = useFinancialStore();
+  const { setData, calculate, reset } = useFinancialStore();
 
   const handleFormSubmit = (data: {
     monthlyDeposit: number;
@@ -15,6 +15,10 @@ export default function Home() {
   }) => {
     setData(data);
     calculate();
+  };
+
+  const handleReset = () => {
+    reset();
   };
 
   return (
@@ -59,7 +63,7 @@ export default function Home() {
               <h2 className="mb-4 text-sm font-medium text-slate-200 sm:text-base">
                 투자 정보 입력
               </h2>
-              <InputForm onSubmit={handleFormSubmit} />
+              <InputForm onSubmit={handleFormSubmit} onReset={handleReset} />
             </div>
 
             {/* 차트 */}
