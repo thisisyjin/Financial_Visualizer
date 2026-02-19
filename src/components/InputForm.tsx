@@ -8,13 +8,14 @@ interface InputFormProps {
     annualRate: number;
     years: number;
   }) => void;
+  onReset?: () => void;
 }
 
 const DEFAULT_MONTHLY_DEPOSIT = 100000;
 const DEFAULT_ANNUAL_RATE = 7.5;
 const DEFAULT_YEARS = 10;
 
-export default function InputForm({ onSubmit }: InputFormProps) {
+export default function InputForm({ onSubmit, onReset }: InputFormProps) {
   const [monthlyDeposit, setMonthlyDeposit] = useState<string>(
     DEFAULT_MONTHLY_DEPOSIT.toString()
   );
@@ -181,12 +182,29 @@ export default function InputForm({ onSubmit }: InputFormProps) {
         )}
       </div>
 
-      <button
-        type="submit"
-        className="w-full rounded-lg bg-slate-700 px-4 py-2.5 text-sm font-medium text-slate-50 hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-600/50 focus:ring-offset-2 focus:ring-offset-slate-950 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        계산하기
-      </button>
+      <div className="flex gap-3">
+        <button
+          type="submit"
+          className="flex-1 rounded-lg bg-slate-700 px-4 py-2.5 text-sm font-medium text-slate-50 hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-600/50 focus:ring-offset-2 focus:ring-offset-slate-950 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          계산하기
+        </button>
+        {onReset && (
+          <button
+            type="button"
+            onClick={() => {
+              setMonthlyDeposit(DEFAULT_MONTHLY_DEPOSIT.toString());
+              setAnnualRate(DEFAULT_ANNUAL_RATE.toString());
+              setYears(DEFAULT_YEARS.toString());
+              setErrors({});
+              onReset();
+            }}
+            className="rounded-lg border border-slate-600 bg-slate-800/50 px-4 py-2.5 text-sm font-medium text-slate-300 hover:bg-slate-700 hover:border-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-600/50 focus:ring-offset-2 focus:ring-offset-slate-950 transition-colors"
+          >
+            초기화
+          </button>
+        )}
+      </div>
     </form>
   );
 }
