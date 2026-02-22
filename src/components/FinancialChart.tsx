@@ -25,7 +25,6 @@ export default function FinancialChart() {
     );
   }
 
-  // 차트 데이터 포맷팅
   const chartData = snapshots.map((snapshot) => ({
     year: `${snapshot.year}년`,
     원금: Math.round(snapshot.totalDeposit),
@@ -33,7 +32,6 @@ export default function FinancialChart() {
     총자산: Math.round(snapshot.totalAmount),
   }));
 
-  // 숫자 포맷팅 함수 (천 단위 콤마)
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat("ko-KR").format(value);
   };
