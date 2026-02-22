@@ -107,6 +107,9 @@ export default function InputForm({ onSubmit, onReset }: InputFormProps) {
             }
           }}
           placeholder="예: 100000"
+          aria-label="월 적립금 입력"
+          aria-invalid={!!errors.monthlyDeposit}
+          aria-describedby={errors.monthlyDeposit ? "monthlyDeposit-error" : undefined}
           className={`w-full rounded-lg border bg-slate-800/50 px-4 py-2.5 text-slate-50 placeholder:text-slate-500 focus:outline-none focus:ring-2 transition-colors ${
             errors.monthlyDeposit
               ? "border-red-500 focus:border-red-500 focus:ring-red-500/50"
@@ -114,7 +117,9 @@ export default function InputForm({ onSubmit, onReset }: InputFormProps) {
           }`}
         />
         {errors.monthlyDeposit && (
-          <p className="mt-1.5 text-xs text-red-400">{errors.monthlyDeposit}</p>
+          <p id="monthlyDeposit-error" className="mt-1.5 text-xs text-red-400" role="alert">
+            {errors.monthlyDeposit}
+          </p>
         )}
       </div>
 
@@ -137,6 +142,9 @@ export default function InputForm({ onSubmit, onReset }: InputFormProps) {
             }
           }}
           placeholder="예: 7.5"
+          aria-label="예상 연 수익률 입력"
+          aria-invalid={!!errors.annualRate}
+          aria-describedby={errors.annualRate ? "annualRate-error" : undefined}
           className={`w-full rounded-lg border bg-slate-800/50 px-4 py-2.5 text-slate-50 placeholder:text-slate-500 focus:outline-none focus:ring-2 transition-colors ${
             errors.annualRate
               ? "border-red-500 focus:border-red-500 focus:ring-red-500/50"
@@ -144,7 +152,9 @@ export default function InputForm({ onSubmit, onReset }: InputFormProps) {
           }`}
         />
         {errors.annualRate && (
-          <p className="mt-1.5 text-xs text-red-400">{errors.annualRate}</p>
+          <p id="annualRate-error" className="mt-1.5 text-xs text-red-400" role="alert">
+            {errors.annualRate}
+          </p>
         )}
       </div>
 
@@ -167,6 +177,9 @@ export default function InputForm({ onSubmit, onReset }: InputFormProps) {
             }
           }}
           placeholder="예: 10"
+          aria-label="투자 기간 입력"
+          aria-invalid={!!errors.years}
+          aria-describedby={errors.years ? "years-error" : "years-help"}
           className={`w-full rounded-lg border bg-slate-800/50 px-4 py-2.5 text-slate-50 placeholder:text-slate-500 focus:outline-none focus:ring-2 transition-colors ${
             errors.years
               ? "border-red-500 focus:border-red-500 focus:ring-red-500/50"
@@ -174,9 +187,11 @@ export default function InputForm({ onSubmit, onReset }: InputFormProps) {
           }`}
         />
         {errors.years ? (
-          <p className="mt-1.5 text-xs text-red-400">{errors.years}</p>
+          <p id="years-error" className="mt-1.5 text-xs text-red-400" role="alert">
+            {errors.years}
+          </p>
         ) : (
-          <p className="mt-1.5 text-xs text-slate-500">
+          <p id="years-help" className="mt-1.5 text-xs text-slate-500">
             최대 50년까지 입력 가능합니다.
           </p>
         )}
@@ -185,6 +200,7 @@ export default function InputForm({ onSubmit, onReset }: InputFormProps) {
       <div className="flex gap-3">
         <button
           type="submit"
+          aria-label="투자 정보 계산하기"
           className="flex-1 rounded-lg bg-slate-700 px-4 py-2.5 text-sm font-medium text-slate-50 hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-600/50 focus:ring-offset-2 focus:ring-offset-slate-950 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           계산하기
@@ -199,6 +215,7 @@ export default function InputForm({ onSubmit, onReset }: InputFormProps) {
               setErrors({});
               onReset();
             }}
+            aria-label="입력값 초기화"
             className="rounded-lg border border-slate-600 bg-slate-800/50 px-4 py-2.5 text-sm font-medium text-slate-300 hover:bg-slate-700 hover:border-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-600/50 focus:ring-offset-2 focus:ring-offset-slate-950 transition-colors"
           >
             초기화

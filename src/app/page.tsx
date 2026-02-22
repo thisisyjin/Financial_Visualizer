@@ -37,9 +37,10 @@ export default function Home() {
             href="https://github.com/thisisyjin/Financial_Visualizer"
             target="_blank"
             rel="noreferrer"
+            aria-label="GitHub 리포지토리 열기"
             className="inline-flex items-center gap-2 rounded-md border border-slate-700 px-3 py-1.5 text-sm text-slate-200 hover:border-slate-500 hover:bg-slate-900 transition-colors"
           >
-            <Github className="h-4 w-4" />
+            <Github className="h-4 w-4" aria-hidden="true" />
             <span className="hidden sm:inline">GitHub</span>
           </a>
         </div>
