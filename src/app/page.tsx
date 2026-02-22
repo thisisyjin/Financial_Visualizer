@@ -6,7 +6,7 @@ import { useFinancialStore } from "@/store/useFinancialStore";
 import { Github } from "lucide-react";
 
 export default function Home() {
-  const { setData, calculate } = useFinancialStore();
+  const { setData, calculate, reset } = useFinancialStore();
 
   const handleFormSubmit = (data: {
     monthlyDeposit: number;
@@ -17,10 +17,11 @@ export default function Home() {
     calculate();
   };
 
+  const handleReset = () => {
+    reset();
+  };
+
   return (
-    // 이 컴포넌트는 페이지 단위 레이아웃을 담당한다.
-    // 헤더 - 메인 콘텐츠 - 푸터 구조를 만들고,
-    // 메인 내부의 그리드 영역에 이후 입력 폼과 차트 컴포넌트를 배치할 예정이다.
     <div className="flex min-h-screen flex-col">
       {/* Header */}
       <header className="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur">
@@ -33,9 +34,10 @@ export default function Home() {
             href="https://github.com/thisisyjin/Financial_Visualizer"
             target="_blank"
             rel="noreferrer"
+            aria-label="GitHub 리포지토리 열기"
             className="inline-flex items-center gap-2 rounded-md border border-slate-700 px-3 py-1.5 text-sm text-slate-200 hover:border-slate-500 hover:bg-slate-900 transition-colors"
           >
-            <Github className="h-4 w-4" />
+            <Github className="h-4 w-4" aria-hidden="true" />
             <span className="hidden sm:inline">GitHub</span>
           </a>
         </div>
@@ -54,15 +56,13 @@ export default function Home() {
           </section>
 
           <section className="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1.2fr)]">
-            {/* 입력 폼 */}
             <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4 sm:p-6">
               <h2 className="mb-4 text-sm font-medium text-slate-200 sm:text-base">
                 투자 정보 입력
               </h2>
-              <InputForm onSubmit={handleFormSubmit} />
+              <InputForm onSubmit={handleFormSubmit} onReset={handleReset} />
             </div>
 
-            {/* 차트 */}
             <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4 sm:p-6">
               <h2 className="mb-4 text-sm font-medium text-slate-200 sm:text-base">
                 자산 시각화
