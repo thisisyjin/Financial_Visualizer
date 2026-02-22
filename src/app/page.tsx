@@ -22,9 +22,6 @@ export default function Home() {
   };
 
   return (
-    // 이 컴포넌트는 페이지 단위 레이아웃을 담당한다.
-    // 헤더 - 메인 콘텐츠 - 푸터 구조를 만들고,
-    // 메인 내부의 그리드 영역에 이후 입력 폼과 차트 컴포넌트를 배치할 예정이다.
     <div className="flex min-h-screen flex-col">
       {/* Header */}
       <header className="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur">
@@ -59,7 +56,6 @@ export default function Home() {
           </section>
 
           <section className="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1.2fr)]">
-            {/* 입력 폼 */}
             <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4 sm:p-6">
               <h2 className="mb-4 text-sm font-medium text-slate-200 sm:text-base">
                 투자 정보 입력
@@ -67,7 +63,6 @@ export default function Home() {
               <InputForm onSubmit={handleFormSubmit} onReset={handleReset} />
             </div>
 
-            {/* 차트 */}
             <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4 sm:p-6">
               <h2 className="mb-4 text-sm font-medium text-slate-200 sm:text-base">
                 자산 시각화

@@ -35,12 +35,9 @@ function calculateCompoundInterest(
   let totalDeposit = 0;
 
   for (let month = 1; month <= totalMonths; month++) {
-    // 매월 적립금 추가
     totalDeposit += monthlyDeposit;
-    // 복리 계산: 이전 금액에 이자 추가 후 새로운 적립금 추가
     totalAmount = totalAmount * (1 + monthlyRate) + monthlyDeposit;
 
-    // 매년 말에 스냅샷 저장
     if (month % 12 === 0) {
       const year = month / 12;
       const totalInterest = totalAmount - totalDeposit;
